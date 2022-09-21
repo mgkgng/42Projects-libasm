@@ -1,4 +1,4 @@
-SRCS = srcs/ft_strlen.s
+SRCS = srcs/ft_strlen.s srcs/ft_strcpy.s
 CSRCS = ./test.c
 
 OBJS_ASM = ${SRCS:.s=.o}
