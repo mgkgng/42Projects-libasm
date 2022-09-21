@@ -4,7 +4,7 @@
 #define DELAY 750000
 
 int main() {
-	extern	ft_strlen();
+	extern	int ft_strlen();
 	// extern	ft_strcpy();
 	// extern	ft_strcmp();
 	// extern	ft_write();

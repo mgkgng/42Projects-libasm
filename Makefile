@@ -1,37 +1,37 @@
-SRCS =	srcs/ft_strlen.s 
+SRCS = srcs/ft_strlen.s
+CSRCS = ./test.c
 
-OBJS = ${SRCS:.s=.o}
+OBJS_ASM = ${SRCS:.s=.o}
+OBJS_C = ${CSRCS:.c=.o}
 
-COMPILE = nasm -f macho64
+ASM_FLAGS = -f macho64
+CFLAGS = -Wall -Wextra -Werror
 
-LINK = ld
+LIB_ASM = libasm.a
 
-NAME = libasm.a
-
-TEST = program_test
-
-TEST_BONUS = program_test_bonus
-
-CLEAN = rm -rf
+NAME = libasm
 
 all : ${NAME}
 
 %.o:	%.s
-		$(NA) $(NA_FLAGS) $<
+		nasm ${ASM_FLAGS} $< -o $@
 
-${NAME} :	${OBJS}
-			ar rcs ${NAME} ${OBJS}
+%.o:	%.c
+		-o $@ -c $< ${CFLAGS}
 
-test:	${NAME}
-		gcc -c main.c ${NAME} ${TEST_NAME}
+${LIB_ASM} :	${OBJS_ASM}
+				ar rcs ${LIB_ASM} ${OBJS_ASM}
+
+${NAME}:	${LIB_ASM} ${OBJS_C}
+			gcc ${CFLAGS} -o ${NAME} ${OBJS_C} ${LIB_ASM}
 
 test_bonus:	${NAME}
 			gcc -c main_bonus.c ${NAME} ${TEST_BONUS}
 
 clean:
-		${CLEAN} ${OBJS}
+		rm -rf ${OBJS_ASM} ${OBJS_C}
 
 fclean:	clean
-		${CLEAN} ${NAME}
+		rm -rf ${NAME} ${LIB_ASM}
 
 re:		fclean make all
