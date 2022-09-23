@@ -1,7 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
-
-#define DELAY 750000
+#include "libasm.h"
 
 int main() {
 	extern int ft_strlen();

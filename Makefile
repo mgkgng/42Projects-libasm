@@ -11,6 +11,8 @@ LIB_ASM = libasm.a
 
 NAME = libasm
 
+INCLUDES = -I ./includes
+
 all : ${NAME}
 
 %.o:	%.s
@@ -23,10 +25,7 @@ ${LIB_ASM} :	${OBJS_ASM}
 				ar rcs ${LIB_ASM} ${OBJS_ASM}
 
 ${NAME}:	${LIB_ASM} ${OBJS_C}
-			gcc ${CFLAGS} -o ${NAME} ${OBJS_C} ${LIB_ASM}
-
-test_bonus:	${NAME}
-			gcc -c main_bonus.c ${NAME} ${TEST_BONUS}
+			gcc ${CFLAGS} ${INCLUDES} -o ${NAME} ${OBJS_C} ${LIB_ASM}
 
 clean:
 		rm -rf ${OBJS_ASM} ${OBJS_C}
