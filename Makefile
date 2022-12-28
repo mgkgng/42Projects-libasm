@@ -1,5 +1,5 @@
 SRCS = srcs/ft_strlen.s srcs/ft_strcpy.s
-CSRCS = ./test.c
+CSRCS = main.c
 
 OBJS_ASM = ${SRCS:.s=.o}
 OBJS_C = ${CSRCS:.c=.o}
@@ -19,7 +19,7 @@ all : ${NAME}
 		nasm ${ASM_FLAGS} $< -o $@
 
 %.o:	%.c
-		-o $@ -c $< ${CFLAGS}
+		gcc -o $@ -c ${INCLUDES} $< ${CFLAGS}
 
 ${LIB_ASM} :	${OBJS_ASM}
 				ar rcs ${LIB_ASM} ${OBJS_ASM}

@@ -6,13 +6,16 @@ _ft_strcmp:
 	jmp loop
 
 loop:
-	CMP BYTE[rdi + ecx] BYTE[rsi + ecx]
-	AND -- ca existe lui aussi
+	CMP BYTE [rdi + ecx], 0
 	JE done
+	CMP BYTE [rsi + ecx], 0
+	JE done
+	CMP BYTE [rdi + ecx], BYTE [rsi + ecx]
+	JNE done
 	INC ecx
 	JMP loop
 
 done:
-	MOV rax, BYTE[rdi + ecx]
-	SUB rax BYTE[rsi + ecx]
+	MOV rax, BYTE [rdi + ecx]
+	SUB rax, BYTE [rsi + ecx]
 	RET

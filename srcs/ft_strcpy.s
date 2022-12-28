@@ -2,17 +2,18 @@ section .text
 	global	_ft_strcpy
 
 _ft_strcpy:
-	MOV rdi, rax
-	XOR ecx, ecx
+	xor rax, rax
 	jmp loop
 
 loop:
-	CMP BYTE[rsi + ecx], 0
-	JE done
-	MOV BYTE[rsi + ecx], BYTE[rdi + ecx]
-	INC ecx
-	JMP loop
+	cmp byte [rsi + rax], 0
+	je done
+	mov cl, byte [rsi + rax]
+	mov byte [rdi + rax], cl
+	inc rax
+	jmp loop
 
 done:
-	MOV BYTE[rdi + ecx], 0
-	RET
+	mov byte [rdi + rax], 0
+	mov rax, rdi
+	ret
