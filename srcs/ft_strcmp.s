@@ -2,20 +2,20 @@ section .text
 	global	_ft_strcmp
 
 _ft_strcmp:
-	XOR ecx, ecx
+	xor ecx, ecx
 	jmp loop
 
 loop:
-	CMP BYTE [rdi + ecx], 0
-	JE done
-	CMP BYTE [rsi + ecx], 0
-	JE done
-	CMP BYTE [rdi + ecx], BYTE [rsi + ecx]
-	JNE done
-	INC ecx
-	JMP loop
+	cmp byte [rdi + ecx], 0
+	je done
+	cmp byte [rsi + ecx], 0
+	je done
+	cmp byte [rdi + ecx], byte [rsi + ecx]
+	je done
+	inc ecx
+	jmp loop
 
 done:
-	MOV rax, BYTE [rdi + ecx]
-	SUB rax, BYTE [rsi + ecx]
+	mov rax, byte [rdi + ecx]
+	sub rax, byte [rsi + ecx]
 	RET
